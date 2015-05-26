@@ -1,0 +1,11 @@
+config TOUCHSCREEN_GT82x
+tristate "GT82x for Android"
+depends on I2C
+default y
+help
+This is a android driver to support the Gooidx's GT82x and GT813 touchscreen 
+on s3c6410 platform. The touchscreen support multi-touch as more as ten.
+Say Y here to enable the driver for the touchscreen on the
+S3C SMDK board. 
+If unsure, say N.To compile this driver as a module, choose M here: 
+the module will be called gt82x.ko.

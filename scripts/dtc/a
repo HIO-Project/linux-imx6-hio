@@ -1,0 +1,1 @@
+./dtc our.dts -I dts -O dtb -o ../../dts/imx6q-sabrelite.dtb
