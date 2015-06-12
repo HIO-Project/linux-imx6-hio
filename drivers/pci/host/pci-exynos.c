@@ -393,9 +393,7 @@ static irqreturn_t exynos_pcie_msi_irq_handler(int irq, void *arg)
 {
 	struct pcie_port *pp = arg;
 
-	dw_handle_msi_irq(pp);
-
-	return IRQ_HANDLED;
+	return dw_handle_msi_irq(pp);
 }
 
 static void exynos_pcie_msi_init(struct pcie_port *pp)
@@ -446,7 +444,7 @@ static int exynos_pcie_rd_own_conf(struct pcie_port *pp, int where, int size,
 	int ret;
 
 	exynos_pcie_sideband_dbi_r_mode(pp, true);
-	ret = cfg_read(pp->dbi_base + (where & ~0x3), where, size, val);
+	ret = dw_pcie_cfg_read(pp->dbi_base + (where & ~0x3), where, size, val);
 	exynos_pcie_sideband_dbi_r_mode(pp, false);
 	return ret;
 }
@@ -457,7 +455,8 @@ static int exynos_pcie_wr_own_conf(struct pcie_port *pp, int where, int size,
 	int ret;
 
 	exynos_pcie_sideband_dbi_w_mode(pp, true);
-	ret = cfg_write(pp->dbi_base + (where & ~0x3), where, size, val);
+	ret = dw_pcie_cfg_write(pp->dbi_base + (where & ~0x3),
+			where, size, val);
 	exynos_pcie_sideband_dbi_w_mode(pp, false);
 	return ret;
 }
@@ -523,7 +522,6 @@ static int add_pcie_port(struct pcie_port *pp, struct platform_device *pdev)
 	pp->root_bus_nr = -1;
 	pp->ops = &exynos_pcie_host_ops;
 
-	spin_lock_init(&pp->conf_lock);
 	ret = dw_pcie_host_init(pp);
 	if (ret) {
 		dev_err(&pdev->dev, "failed to initialize host\n");

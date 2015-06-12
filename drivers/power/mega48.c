@@ -13,6 +13,7 @@
 #include <linux/bitops.h>
 #include <linux/input/mt.h>
 #include <linux/io.h>
+#include <linux/of_gpio.h>
 
 //#define DEBUG printk
 #define DEBUG(...)
@@ -228,6 +229,24 @@ static int mega48_probe(struct i2c_client *client,
 {
 	int rc=0;
 	DEBUG("MQ===================%s==============================\n", __FUNCTION__);
+	//+++wangwenjing begin 20150601@add sata power enable
+	struct device_node* np = client->dev.of_node;
+	if(np != NULL){	
+		int sata_power_en = of_get_named_gpio(np, "sata-poweren", 0);	
+		if (!gpio_is_valid(sata_power_en)){
+			printk("can not find sata-poweren gpio pins\n");
+		}else{
+			rc = gpio_request(sata_power_en, "sata_power_en");
+			if(rc){
+				printk("request gpio sata_power_en failed\n");
+			}else{
+				gpio_direction_output(sata_power_en, 0);
+				msleep(50);
+				gpio_direction_output(sata_power_en, 1);
+			}
+		}
+	}
+	//+++wangwenjing end 20150601@add sata power enable
 	mac_id_sys_init();
 	if (!i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_BYTE_DATA)) {
 		dev_err(&client->dev, "i2c bus does not support the powermcu\n");

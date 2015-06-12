@@ -176,6 +176,7 @@
 
 	mega48@60 {
 		compatible = "fsl,mega48-i2c";
+		sata-poweren=<&gpio5 2 0>;
 		reg = <0x60>;
 	};
 
@@ -267,7 +268,23 @@
 				/*MX6QDL_PAD_EIM_D24__UART3_TX_DATA 0x80000000 */
 				/*MX6QDL_PAD_EIM_D25__UART3_RX_DATA 0x80000000 */
 				/*MX6QDL_PAD_EIM_D28__GPIO3_IO28 0x170b0*/
+				/*+++LJH GPIO8-20 test*/
 				MX6QDL_PAD_DISP0_DAT8__GPIO4_IO29 0x80000000
+				MX6QDL_PAD_DISP0_DAT9__GPIO4_IO30 0x80000000
+				MX6QDL_PAD_DISP0_DAT10__GPIO4_IO31 0x80000000
+				MX6QDL_PAD_DISP0_DAT11__GPIO5_IO05 0x80000000
+				MX6QDL_PAD_DISP0_DAT12__GPIO5_IO06 0x80000000
+				MX6QDL_PAD_DISP0_DAT13__GPIO5_IO07 0x80000000
+				MX6QDL_PAD_DISP0_DAT14__GPIO5_IO08 0x80000000
+				MX6QDL_PAD_DISP0_DAT15__GPIO5_IO09 0x80000000
+				MX6QDL_PAD_DISP0_DAT16__GPIO5_IO10 0x80000000
+				MX6QDL_PAD_DISP0_DAT17__GPIO5_IO11 0x80000000
+				MX6QDL_PAD_DISP0_DAT18__GPIO5_IO12 0x80000000
+				MX6QDL_PAD_DISP0_DAT19__GPIO5_IO13 0x80000000
+				MX6QDL_PAD_DISP0_DAT20__GPIO5_IO14 0x80000000
+				/*+++LJH end*/
+				/*+++ wangwenjing*/
+				MX6QDL_PAD_EIM_A25__GPIO5_IO02 0x80000000
 			>;
 		};
 	};
@@ -344,11 +361,13 @@
         status = "okay";
 };
 
+/*---wangwenjing 20150611@delete for SATA_POWER_EN
 &hdmi_cec {
         pinctrl-names = "default";
         pinctrl-0 = <&pinctrl_hdmi_cec_1>;
         status = "okay";
 };
+*/
 &vpu {
 	pu-supply = <&reg_pu>; /* ldo-bypass:use pu_dummy if VDDSOC share with VDDPU */
 	status = "okay";

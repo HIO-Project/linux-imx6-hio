@@ -135,7 +135,27 @@
 			arm,tag-latency = <4 2 3>;
 			arm,data-latency = <4 2 3>;
 		};
-
+#if 1
+		pcie: pcie@0x01000000 {
+			compatible = "fsl,imx6q-pcie", "snps,dw-pcie";
+			reg = <0x01ffc000 0x04000>,
+			      <0x01f00000 0x80000>;
+			reg-names = "dbi", "config";
+			#address-cells = <3>;
+			#size-cells = <2>;
+			device_type = "pci";
+			ranges = <0x00000800 0 0x01f00000 0x01f00000 0 0x00080000 /* configuration space */
+				  0x81000000 0 0          0x01f80000 0 0x00010000 /* downstream I/O */
+				  0x82000000 0 0x01000000 0x01000000 0 0x00f00000>; /* non-prefetchable memory */
+			num-lanes = <1>;
+			interrupts = <0 120 0x04>;
+			interrupt-names = "msi";
+			#interrupt-cells = <1>;
+			clocks = <&clks 189>, <&clks 187>, <&clks 144>, <&clks 212>;
+			clock-names = "pcie_ref_125m", "sata_ref_100m", "pcie_axi", "lvds_gate";
+			status = "disabled";
+		};
+#else
 		pcie: pcie@0x01000000 {
 			compatible = "fsl,imx6q-pcie", "snps,dw-pcie";
 			reg = <0x01ffc000 0x4000>; /* DBI */
@@ -151,7 +171,7 @@
 			clock-names = "pcie_ref_125m", "sata_ref_100m", "pcie_axi", "lvds_gate";
 			status = "disabled";
 		};
-
+#endif
 		pmu {
 			compatible = "arm,cortex-a9-pmu";
 			interrupts = <0 94 0x04>;

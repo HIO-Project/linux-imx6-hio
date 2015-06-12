@@ -330,11 +330,13 @@
 	status = "okay";
 };
 
+/*--- wangwenjing 20150601@delete KEY_ROW2 usage
 &hdmi_cec {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_hdmi_cec_2>;
 	status = "okay";
 };
+*/
 
 &hdmi_core {
 	ipu_id = <0>;
@@ -657,11 +659,13 @@
 	status = "okay";
 };
 
+
 &pcie {
-	power-on-gpio = <&gpio3 19 0>;
-	reset-gpio = <&gpio7 12 0>;
+	//power-on-gpio = <&gpio3 19 0>;
+	//reset-gpio = <&gpio7 12 0>;
 	status = "okay";
 };
+
 
 &pwm1 {
 	pinctrl-names = "default";
