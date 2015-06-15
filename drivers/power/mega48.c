@@ -14,6 +14,8 @@
 #include <linux/input/mt.h>
 #include <linux/io.h>
 #include <linux/of_gpio.h>
+#include <linux/proc_fs.h>
+#include <linux/uaccess.h>
 
 //#define DEBUG printk
 #define DEBUG(...)
@@ -224,6 +226,49 @@ static void mac_id_sys_init(void)
 	}
 }
 
+//+++wangwenjing begin 20150612@add sata power api control
+int power_statu = 1;
+int sata_power_en;
+static int show_powr_off(struct seq_file* seq, void* data){
+	char status[3] = {0};
+	sprintf(status, "%d\n", power_statu);
+	seq_puts(seq, status);
+	
+	return 0;
+}
+
+static int pwr_open(struct inode* inode, struct file* file){
+	return single_open(file, show_powr_off, inode->i_private);
+}
+
+static size_t pwr_set(struct file* file, const char __user *buffer, size_t count, loff_t* ppos){
+	char buf[4];
+	unsigned long data;
+	if(count > 4)
+		count = 4;
+
+	if (copy_from_user(buf, buffer, count)) {
+                return -EFAULT;
+        }
+
+	buf[count] = '\0';	
+	data = simple_strtoul(buf, '\0', 10); 
+
+	if(data == 0)
+		gpio_direction_output(sata_power_en, 0);
+	else
+		gpio_direction_output(sata_power_en, 1);
+
+	power_statu = (data == 0)?0:1;
+	return count;
+}
+static const struct file_operations pwr_status_fops={
+	.owner = THIS_MODULE,
+	.open = pwr_open,
+	.read = seq_read,
+	.write = pwr_set,
+};
+//+++wangwenjing end 20150612@add sata power api control
 static int mega48_probe(struct i2c_client *client,
 						       const struct i2c_device_id *id)
 {
@@ -232,7 +277,7 @@ static int mega48_probe(struct i2c_client *client,
 	//+++wangwenjing begin 20150601@add sata power enable
 	struct device_node* np = client->dev.of_node;
 	if(np != NULL){	
-		int sata_power_en = of_get_named_gpio(np, "sata-poweren", 0);	
+		sata_power_en = of_get_named_gpio(np, "sata-poweren", 0);	
 		if (!gpio_is_valid(sata_power_en)){
 			printk("can not find sata-poweren gpio pins\n");
 		}else{
@@ -243,6 +288,10 @@ static int mega48_probe(struct i2c_client *client,
 				gpio_direction_output(sata_power_en, 0);
 				msleep(50);
 				gpio_direction_output(sata_power_en, 1);
+				//+++wangwenjing begin 20150612@add sata power api control
+			        struct proc_dir_entry *pwr_root_dir = proc_mkdir("power", NULL);
+				proc_create("sata_power", 0660, pwr_root_dir, &pwr_status_fops);
+				//+++wangwenjing end 20150612@add sata power api control
 			}
 		}
 	}
