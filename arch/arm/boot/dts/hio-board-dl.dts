@@ -69,7 +69,7 @@
 			//"DMICDAT", "DMIC";
 		mux-int-port = <1>;
 		mux-ext-port = <4>;
-		hp-det-gpios = <&gpio7 8 1>;
+		/*hp-det-gpios = <&gpio7 8 1>;*/
 		/*+++wwj begin 20150317@add mic detect*/
 		#ifdef CONFIG_MIC_DEC
 	              mic-det-gpios = <&gpio7 11 1>;
