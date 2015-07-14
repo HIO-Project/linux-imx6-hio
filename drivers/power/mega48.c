@@ -27,6 +27,7 @@ static unsigned char mcu_cmd[1] ;
 static unsigned char mac_buf[6];
 static struct i2c_client m_client;
 static unsigned char mac_addr[6];
+unsigned char g_mac_addr[6];
 
 /*
  * calibration default value
@@ -148,6 +149,13 @@ static int read_ethnet_mac_addr(void)
 		}
 	}
 	DEBUG("ethnet address mac address:%02x:%02x:%02x:%02x:%02x:%02x\n",mac_addr[0],mac_addr[1],mac_addr[2],mac_addr[3],mac_addr[4],mac_addr[5]);
+	g_mac_addr[5]=mac_addr[0];
+	g_mac_addr[4]=mac_addr[1];
+	g_mac_addr[3]=mac_addr[2];
+	g_mac_addr[2]=mac_addr[3];
+	g_mac_addr[1]=mac_addr[4];
+	g_mac_addr[0]=mac_addr[5];
+        printk("ethnet address mac address:%02x:%02x:%02x:%02x:%02x:%02x\n",g_mac_addr[0],g_mac_addr[1],g_mac_addr[2],g_mac_addr[3],g_mac_addr[4],g_mac_addr[5]);	
 	return ret;
 no_mcu:
 	DEBUG("%s   no mcu!!!!\n", __FUNCTION__);
@@ -273,6 +281,8 @@ static int mega48_probe(struct i2c_client *client,
 						       const struct i2c_device_id *id)
 {
 	int rc=0;
+
+	memset(g_mac_addr, 0x00, 6);
 	DEBUG("MQ===================%s==============================\n", __FUNCTION__);
 	//+++wangwenjing begin 20150601@add sata power enable
 	struct device_node* np = client->dev.of_node;

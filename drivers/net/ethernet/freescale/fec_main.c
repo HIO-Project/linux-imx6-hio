@@ -1086,6 +1086,7 @@ static int fec_enet_rx_napi(struct napi_struct *napi, int budget)
 }
 
 /* ------------------------------------------------------------------------- */
+extern unsigned char g_mac_addr[6];
 static void fec_get_mac(struct net_device *ndev)
 {
 	struct fec_enet_private *fep = netdev_priv(ndev);
@@ -1099,11 +1100,19 @@ static void fec_get_mac(struct net_device *ndev)
 	 *    fec.macaddr=0x00,0x04,0x9f,0x01,0x30,0xe0
 	 */
 	iap = macaddr;
+	iap = g_mac_addr;
+	if ((g_mac_addr[0] == 0x00) && (g_mac_addr[1] == 0x00) && (g_mac_addr[2] == 0x00) && (g_mac_addr[3] == 0x00) && (g_mac_addr[4] == 0x00) &&
+		(g_mac_addr[5] == 0x00))
+		printk("\n fec:Get mac error!! \n");
+	else
+		iap = g_mac_addr;
 
+//printk("mac:ttt \n");
 	/*
 	 * 2) from device tree data
 	 */
 	if (!is_valid_ether_addr(iap)) {
+//printk("mac:ttt1 \n");
 		struct device_node *np = fep->pdev->dev.of_node;
 		if (np) {
 			const char *mac = of_get_mac_address(np);
@@ -1116,6 +1125,7 @@ static void fec_get_mac(struct net_device *ndev)
 	 * 3) from flash or fuse (via platform data)
 	 */
 	if (!is_valid_ether_addr(iap)) {
+//printk("mac:ttt2 \n");
 #ifdef CONFIG_M5272
 		if (FEC_FLASHMAC)
 			iap = (unsigned char *)FEC_FLASHMAC;
@@ -1129,6 +1139,7 @@ static void fec_get_mac(struct net_device *ndev)
 	 * 4) FEC mac registers set by bootloader
 	 */
 	if (!is_valid_ether_addr(iap)) {
+//printk("mac:ttt3 \n");
 		*((unsigned long *) &tmpaddr[0]) =
 			be32_to_cpu(readl(fep->hwp + FEC_ADDR_LOW));
 		*((unsigned short *) &tmpaddr[4]) =
@@ -1140,6 +1151,7 @@ static void fec_get_mac(struct net_device *ndev)
 	 * 5) random mac address
 	 */
 	if (!is_valid_ether_addr(iap)) {
+//printk("mac:ttt4 \n");
 		/* Report it and use a random ethernet address instead */
 		netdev_err(ndev, "Invalid MAC address: %pM\n", iap);
 		eth_hw_addr_random(ndev);
