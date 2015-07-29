@@ -645,7 +645,7 @@ static irqreturn_t goodix_ts_irq_handler(int irq, void *dev_id)
     struct goodix_ts_data *ts = dev_id;
 
     GTP_DEBUG_FUNC();
-    printk("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+    //printk("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
     gtp_irq_disable(ts);
     queue_work(goodix_wq, &ts->work);
 	
