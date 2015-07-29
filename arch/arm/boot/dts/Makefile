@@ -103,7 +103,8 @@ dtb-$(CONFIG_ARCH_MXC) += \
 	imx6dl-sabresd.dtb \
 	hio-imx6dl-poe.dtb	\
 	hio-imx6dl-board.dtb \
-	hio-imx6dl-uart5.dtb 
+	hio-imx6dl-uart5.dtb \
+	hio-imx6dl-ppc4507.dtb 
 dtb-$(CONFIG_ARCH_NOMADIK) += ste-nomadik-s8815.dtb
 dtb-$(CONFIG_ARCH_OMAP2PLUS) += omap2420-h4.dtb \
 	omap3430-sdp.dtb \
