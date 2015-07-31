@@ -8,7 +8,7 @@
 
 /dts-v1/;
 
-#include "hio-board-dl.dtsi"
+#include "hio-ppc4507-dl.dtsi"
 #include "hio-board-qdl-sabresd.dtsi"
 
 / {
@@ -273,8 +273,6 @@
 				MX6QDL_PAD_EIM_DA8__GPIO3_IO08 0x80000000
 				MX6QDL_PAD_GPIO_4__GPIO1_IO04  0x80000000
 				MX6QDL_PAD_GPIO_1__GPIO1_IO01  0x170b0		
-				/*MX6QDL_PAD_EIM_D24__UART3_TX_DATA 0x80000000 */
-				/*MX6QDL_PAD_EIM_D25__UART3_RX_DATA 0x80000000 */
 				/*MX6QDL_PAD_EIM_D28__GPIO3_IO28 0x170b0*/
 				/*+++LJH GPIO8-20 test*/
 				MX6QDL_PAD_DISP0_DAT8__GPIO4_IO29 0x80000000
@@ -330,25 +328,19 @@
 	fsl,uart-has-rtscts;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart3_1>;
-	bt_rst_n = <&gpio4 6 1>;
 };
 
-#if 0
 &uart4 {
        status = "okay";
        pinctrl-names = "default";
        pinctrl-0 = <&pinctrl_uart4_1>;
 };
-#endif
 
-#ifdef CONFIG_POE_UART5
 &uart5 {
        status = "okay";
        pinctrl-names = "default";
        pinctrl-0 = <&pinctrl_uart5_1>;
- };
-#endif
-
+};
 
 &usbh1 {
 	status = "okay";
