@@ -335,7 +335,7 @@ int rt5631_headset_detect(struct snd_soc_codec *codec, int jack_insert)
 }
 EXPORT_SYMBOL(rt5631_headset_detect);
 
-static const DECLARE_TLV_DB_SCALE(out_vol_tlv, -4650, 150, 0);
+static const DECLARE_TLV_DB_SCALE(out_vol_tlv, -4650, 150, 1);
 static const DECLARE_TLV_DB_SCALE(dac_vol_tlv, -95625, 375, 0);
 static const DECLARE_TLV_DB_SCALE(in_vol_tlv, -3450, 150, 0);
 /* {0, +20, +24, +30, +35, +40, +44, +50, +52} dB */
