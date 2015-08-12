@@ -377,6 +377,13 @@ config TOUCHSCREEN_GT801
 	If unsure, say N.To compile this driver as a module, choose M here: 
 	the module will be called gt801.ko.
 
+config TOUCHSCREEN_FT6X06
+        tristate "FT6X06 for yocto"
+        depends on I2C
+        default y
+        help
+        tristate VTL touchscreen
+
 config TOUCHSCREEN_VTL_CT36X
 	tristate "CT36X for yocto"
 	depends on I2C 

@@ -37,6 +37,14 @@ struct mxc_lcdif_data {
 
 static struct fb_videomode lcdif_modedb[] = {
 	{
+	/*SHARP LS035Y8DX02A 480X800 @ 60 Hz , pixel clk @ 26MHz */
+	"480x800", 60, 480, 800, 25148, 24, 16, 2, 4, 16, 2,
+	//"480x800", 60, 480, 800, 38461, 24, 16, 2, 4, 16, 2,
+	FB_SYNC_CLK_LAT_FALL,
+	FB_VMODE_NONINTERLACED,
+	0,},
+#if 0
+	{
 	/* 800x480 @ 57 Hz , pixel clk @ 27MHz */
 	"CLAA-WVGA", 57, 800, 480, 37037, 40, 60, 10, 10, 20, 10,
 	FB_SYNC_CLK_LAT_FALL,
@@ -48,6 +56,7 @@ static struct fb_videomode lcdif_modedb[] = {
 	FB_SYNC_CLK_LAT_FALL,
 	FB_VMODE_NONINTERLACED,
 	0,},
+#endif
 };
 static int lcdif_modedb_sz = ARRAY_SIZE(lcdif_modedb);
 
