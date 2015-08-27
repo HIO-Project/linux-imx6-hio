@@ -1111,7 +1111,7 @@
 			fsl,pins = <
 				MX6QDL_PAD_KEY_COL1__ECSPI1_MISO 0x100b1
 				MX6QDL_PAD_KEY_ROW0__ECSPI1_MOSI 0x100b1
-				MX6QDL_PAD_KEY_COL0__ECSPI1_SCLK 0x100b1
+				//MX6QDL_PAD_KEY_COL0__ECSPI1_SCLK 0x100b1
 			>;
 		};
 	};
@@ -1234,16 +1234,16 @@
 			>;
 		};
 	};
-
+#if 0
 	flexcan2 {
 		pinctrl_flexcan2_1: flexcan2grp-1 {
 			fsl,pins = <
 				MX6QDL_PAD_KEY_COL4__FLEXCAN2_TX 0x80000000
-				MX6QDL_PAD_KEY_ROW4__FLEXCAN2_RX 0x80000000
+				//MX6QDL_PAD_KEY_ROW4__FLEXCAN2_RX 0x80000000
 			>;
 		};
 	};
-
+#endif
 	gpmi-nand {
 		pinctrl_gpmi_nand_1: gpmi-nand-1 {
 			fsl,pins = <
@@ -1543,7 +1543,7 @@
 		pinctrl_uart4_1: uart4grp-1 {
 			fsl,pins = <
 				MX6QDL_PAD_KEY_COL0__UART4_TX_DATA 0x1b0b1
-				MX6QDL_PAD_KEY_ROW0__UART4_RX_DATA 0x1b0b1
+				//MX6QDL_PAD_KEY_ROW0__UART4_RX_DATA 0x1b0b1
 			>;
 		};
 	};
@@ -1552,7 +1552,7 @@
 		pinctrl_uart5_1: uart5grp-1 {
 			fsl,pins = <
 				MX6QDL_PAD_KEY_COL1__UART5_TX_DATA 0x1b0b1
-				MX6QDL_PAD_KEY_ROW1__UART5_RX_DATA 0x1b0b1
+				//MX6QDL_PAD_KEY_ROW1__UART5_RX_DATA 0x1b0b1
 			>;
 		};
 	};

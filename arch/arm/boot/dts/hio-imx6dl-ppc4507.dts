@@ -9,7 +9,7 @@
 /dts-v1/;
 
 #include "hio-ppc4507-dl.dtsi"
-#include "hio-board-qdl-sabresd.dtsi"
+#include "hio-ppc4507-qdl-sabresd.dtsi"
 
 / {
 	model = "Freescale i.MX6 DualLite SABRE Smart Device Board";
@@ -108,6 +108,75 @@
         ds28e10_io = <&gpio1 2 0>;
     };
 //+++MQ
+//add leds
+	//led_pin_gpio: led_gpio@0 {
+	//	fsl,pins = <
+	//		MX6QDL_PAD_KEY_ROW0__GPIO4_IO07 0x110b0
+	//	>;
+	//};
+			
+        leds {
+               	compatible = "gpio-leds";
+		status = "okay";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_led>;	
+
+               	rled1 {
+                       	label = "rled1";
+                       	gpios = <&gpio4 7 0>;
+                       	//linux,default-trigger = "heartbeat";
+			default-state = "off";
+               	};
+	
+                rled2 {
+                        label = "rled2";
+                        gpios = <&gpio4 9 0>;
+                        //linux,default-trigger = "heartbeat";
+                        default-state = "off";
+                };
+
+                rled3 {
+                        label = "rled3";
+                        gpios = <&gpio4 11 0>;
+                        //linux,default-trigger = "heartbeat";
+                        default-state = "off";
+                };
+               
+		rled4 {
+                        label = "rled4";
+                        gpios = <&gpio4 15 0>;
+                        //linux,default-trigger = "heartbeat";
+                        default-state = "off";
+                };	
+
+                lled1 {
+                        label = "lled1";
+                        gpios = <&gpio4 6 0>;
+                        //linux,default-trigger = "heartbeat";
+                        default-state = "off";
+                };
+
+                lled2 {
+                        label = "lled2";
+                        gpios = <&gpio4 8 0>;
+                        //linux,default-trigger = "heartbeat";
+                        default-state = "off";
+                };
+
+                lled3 {
+                        label = "lled3";
+                        gpios = <&gpio4 10 0>;
+                        //linux,default-trigger = "heartbeat";
+                        default-state = "off";
+                };
+
+                lled4 {
+                        label = "lled4";
+                        gpios = <&gpio4 14 0>;
+                        //linux,default-trigger = "heartbeat";
+                        default-state = "off";
+                };
+       	};
 };
 
 &audmux {
@@ -139,6 +208,7 @@
         status = "okay";
 };
 
+#if 0
 &ecspi1 {
 	fsl,spi-num-chipselects = <1>;
 	cs-gpios = <&gpio4 9 0>,
@@ -153,6 +223,7 @@
 		reg = <0>;
 	};
 };
+#endif
 
 &fec {
 	pinctrl-names = "default";
@@ -260,6 +331,20 @@
 	pinctrl-0 = <&pinctrl_hog>;
 
 	hog {
+		pinctrl_led: ledgrp {
+			fsl,pins = <
+				MX6QDL_PAD_KEY_ROW0__GPIO4_IO07 0x17059
+				MX6QDL_PAD_KEY_ROW1__GPIO4_IO09 0x17059
+				MX6QDL_PAD_KEY_ROW2__GPIO4_IO11 0x17059
+				MX6QDL_PAD_KEY_ROW4__GPIO4_IO15 0x17059
+
+				MX6QDL_PAD_KEY_COL0__GPIO4_IO06 0x17059
+				MX6QDL_PAD_KEY_COL1__GPIO4_IO08 0x17059
+				MX6QDL_PAD_KEY_COL2__GPIO4_IO10 0x17059
+				MX6QDL_PAD_KEY_COL4__GPIO4_IO14 0x17059
+			>;
+		};
+
 		pinctrl_hog: hoggrp {
 			fsl,pins = <
 				/* MAX17135 */
@@ -296,6 +381,9 @@
 				MX6QDL_PAD_GPIO_16__GPIO7_IO11 0x80000000
 				/*hp_det*/
 				MX6QDL_PAD_SD3_RST__GPIO7_IO08 0x80000000
+
+
+	
 			>;
 		};
 	};
@@ -330,17 +418,17 @@
 	pinctrl-0 = <&pinctrl_uart3_1>;
 };
 
-&uart4 {
-       status = "okay";
-       pinctrl-names = "default";
-       pinctrl-0 = <&pinctrl_uart4_1>;
-};
+//&uart4 {
+//       status = "okay";
+//       pinctrl-names = "default";
+//       pinctrl-0 = <&pinctrl_uart4_1>;
+//};
 
-&uart5 {
-       status = "okay";
-       pinctrl-names = "default";
-       pinctrl-0 = <&pinctrl_uart5_1>;
-};
+//&uart5 {
+//       status = "disable";
+//       pinctrl-names = "default";
+//       pinctrl-0 = <&pinctrl_uart5_1>;
+//};
 
 &usbh1 {
 	status = "okay";
