@@ -103,7 +103,7 @@
 			gpio = <&gpio2 31 0>;
 			startup-delay-us = <500>;
 			enable-active-high;
-		};
+		}; 
 	};
 
 	/*MQ remove
@@ -215,7 +215,8 @@
 		status = "disabled";
 	};
 
-	/*For yocto 070
+#if 0
+	//For yocto 070
 	mxcfb1: fb@0 {
 		compatible = "fsl,mxc_sdc_fb";
 		disp_dev = "ldb";
@@ -226,7 +227,7 @@
 		late_init = <0>;
 		status = "disabled";
 	};
-	*/
+#endif
 
 	//video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24
 	mxcfb2: fb@1 {
@@ -677,7 +678,7 @@
 				/*MX6QDL_PAD_GPIO_0__CCM_CLKO1    0x130b0//MQ removed*/
 				MX6QDL_PAD_NANDF_CS2__GPIO6_IO15 0x80000000
 				MX6QDL_PAD_NANDF_CS3__GPIO6_IO16 0x80000000
-				MX6QDL_PAD_EIM_D26__GPIO3_IO26 0x80000000
+				/*MX6QDL_PAD_EIM_D26__GPIO3_IO26 0x80000000 LJH*/
 				MX6QDL_PAD_EIM_CS1__GPIO2_IO24 0x80000000
 				MX6QDL_PAD_ENET_RXD0__GPIO1_IO27 0x80000000
 				MX6QDL_PAD_EIM_A25__GPIO5_IO02 0x80000000
@@ -736,6 +737,12 @@
 	};
 };
 
+&uart2{
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart2_1>;
+}; /* LJH add*/
+
 &ldb {
 	ipu_id = <1>;
 	disp_id = <1>;
@@ -777,6 +784,7 @@
 	status = "okay";
 };
 #endif
+
 &ssi2 {
 	fsl,mode = "i2s-slave";
 	status = "okay";
@@ -792,7 +800,6 @@
 	vbus-supply = <&reg_usb_h1_vbus>;
 	status = "okay";
 };
-
 &usbotg {
 	vbus-supply = <&reg_usb_otg_vbus>;
 	pinctrl-names = "default";
@@ -834,20 +841,12 @@
 
 /*tf2*/
 &usdhc4 {
-        pinctrl-names = "default";
-//+++WWJ begin
-#ifdef CONFIG_RII
-		pinctrl-0 = <&pinctrl_usdhc4_2>;
-		cd-gpios = <&gpio2 6 0>;
-        bus-width = <4>;
-#else
-        non-removable;
-		no-1-8-v;
-		keep-power-in-suspend;
-		pinctrl-0 = <&pinctrl_usdhc4_1>;
-		bus-width = <8>;
-#endif	
-//+++WWJ end	
+	pinctrl-names = "default";
+	non-removable;
+	no-1-8-v;
+	keep-power-in-suspend;
+	pinctrl-0 = <&pinctrl_usdhc4_2>;
+	bus-width = <4>;
         status = "okay";
 };
 

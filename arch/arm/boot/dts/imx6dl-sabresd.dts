@@ -118,6 +118,7 @@
         pinctrl-0 = <&pinctrl_audmux_1>;
 };
 
+#if 0
 &mxcfb1 {
         status = "okay";
 };
@@ -133,6 +134,7 @@
 &mxcfb4 {
         status = "okay";
 };
+#endif
 
 &ecspi1 {
 	fsl,spi-num-chipselects = <1>;

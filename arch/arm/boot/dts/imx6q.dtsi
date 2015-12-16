@@ -147,6 +147,7 @@
 			interrupts = <0 115 0x04>;
 			status = "disabled";
 		};
+	#if 0
 		mxcfb1: fb@0 {
 			compatible = "fsl,mxc_sdc_fb";
 			disp_dev = "ldb";
@@ -190,7 +191,7 @@
 			late_init = <0>;
 			status = "disabled";
 		};
-
+	#endif
 		aips-bus@02000000 { /* AIPS1 */
 			spba-bus@02000000 {
 				ecspi5: ecspi@02018000 {

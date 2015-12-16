@@ -26,6 +26,7 @@
 	offset-usb-charger = <1685>;
 };
 
+#if 0
 &mxcfb1 {
 	status = "okay";
 };
@@ -41,6 +42,7 @@
 &mxcfb4 {
 	status = "okay";
 };
+#endif
 
 &sata {
 	status = "okay";

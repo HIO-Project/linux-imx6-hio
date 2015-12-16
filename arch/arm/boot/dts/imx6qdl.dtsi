@@ -992,7 +992,7 @@
 				clock-names = "ipg", "per";
 				dmas = <&sdma 27 4 0>, <&sdma 28 4 0>;
 				dma-names = "rx", "tx";
-				status = "disabled";
+				status = "okay";
 			};
 
 			uart3: serial@021ec000 {
@@ -1540,8 +1540,8 @@
 		pinctrl_uart2_2: uart2grp-2 {
 			fsl,pins = <
 
-                              MX6QDL_PAD_EIM_D26__UART2_RX_DATA   0x1b0b1
-                              MX6QDL_PAD_EIM_D27__UART2_TX_DATA   0x1b0b1
+                              /*MX6QDL_PAD_EIM_D26__UART2_RX_DATA   0x1b0b1
+                              MX6QDL_PAD_EIM_D27__UART2_TX_DATA   0x1b0b1 LJH */
                               MX6QDL_PAD_EIM_D28__UART2_DTE_CTS_B 0x1b0b1
                               MX6QDL_PAD_EIM_D29__UART2_DTE_RTS_B 0x1b0b1
 			>;
@@ -1760,10 +1760,7 @@
 				MX6QDL_PAD_SD4_DAT1__SD4_DATA1 0x17059
 				MX6QDL_PAD_SD4_DAT2__SD4_DATA2 0x17059
 				MX6QDL_PAD_SD4_DAT3__SD4_DATA3 0x17059
-		#ifdef CONFIG_RII
-				MX6QDL_PAD_NANDF_D6__GPIO2_IO06 0x80000000
-		#endif
-			>;
+				>;
 		};
 	};
 
@@ -1796,8 +1793,8 @@
 				MX6QDL_PAD_EIM_D23__EIM_DATA23 0x1b0b0
 				/*MX6QDL_PAD_EIM_D24__EIM_DATA24 0x1b0b0*/
 				/*MX6QDL_PAD_EIM_D25__EIM_DATA25 0x1b0b0*/
-				MX6QDL_PAD_EIM_D26__EIM_DATA26 0x1b0b0
-				MX6QDL_PAD_EIM_D27__EIM_DATA27 0x1b0b0
+			/*	MX6QDL_PAD_EIM_D26__EIM_DATA26 0x1b0b0
+				MX6QDL_PAD_EIM_D27__EIM_DATA27 0x1b0b0  LJH */
 				MX6QDL_PAD_EIM_D28__EIM_DATA28 0x1b0b0
 				MX6QDL_PAD_EIM_D29__EIM_DATA29 0x1b0b0
 			#ifdef CONFIG_RII
