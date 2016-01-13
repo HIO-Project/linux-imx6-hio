@@ -7,7 +7,7 @@ export CROSS_COMPILE=arm-poky-linux-gnueabi-
 
 #make imx_v7_defconfig
 make -j4 uImage LOADADDR=0x10008000
-make hio-imx6q-board.dtb
+make hio-imx6q-ppc4507.dtb
 #make modules
 
 rm uImage
