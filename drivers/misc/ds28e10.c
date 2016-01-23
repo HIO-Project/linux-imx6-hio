@@ -939,8 +939,8 @@ static void __exit ds28e10_exit(void)
 	DEBUG("exit ds28e10 driver 2011 Sybay tec %d \n", __LINE__);
 	platform_driver_unregister(&ds28e10_driver);
 }
-module_init(ds28e10_init);
-module_exit(ds28e10_exit);
+//module_init(ds28e10_init);
+//module_exit(ds28e10_exit);
 
 MODULE_AUTHOR("jocom@sybaytec.com");
 MODULE_DESCRIPTION("ds28e10 Driver");
