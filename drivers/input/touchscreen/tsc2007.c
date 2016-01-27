@@ -304,6 +304,11 @@ static int tsc2007_probe_dt(struct i2c_client *client, struct tsc2007 *ts,
 	int err = 0;
 	u32 val32;
 	u64 val64;
+	int gpio1;
+
+    //ben test
+    gpio1 = of_get_named_gpio(np, "gpio1", 0);
+    printk("ben:test %d\n", gpio1);
 
 	if (!of_property_read_u32(np, "ti,max-rt", &val32))
 		ts->max_rt = val32;
@@ -332,6 +337,10 @@ static int tsc2007_probe_dt(struct i2c_client *client, struct tsc2007 *ts,
 			err);
  		return -EINVAL;
  	}	
+
+	//ben test
+	//gpio1 = of_get_named_gpio(np, "gpio1", 0);
+	//printk("ben:test %d\n", gpio1);
 
 	ts->gpio = of_get_gpio(np, 0);
 	if (!gpio_is_valid(ts->gpio))
