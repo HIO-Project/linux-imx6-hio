@@ -104,12 +104,25 @@
 	};
 
 //+++MQ
+	/*
     ds28e10 {
         compatible = "fsl,imx_ds28e10";
         status = "okay";
         ds28e10_io = <&gpio1 2 0>;
     };
+	*/
 //+++MQ
+
+	//novo_gpio
+    novoGpio {
+        compatible = "novo,gpio";
+        status = "okay";
+    
+        p20_1 = <&gpio4 7 0>;
+		
+		//out
+		p20_10 = <&gpio7 12 0>;
+	};
 };
 
 &audmux {
@@ -134,6 +147,7 @@
         status = "okay";
 };
 
+#if 0
 &ecspi1 {
 	fsl,spi-num-chipselects = <1>;
 	cs-gpios = <&gpio4 9 0>,
@@ -148,6 +162,7 @@
 		reg = <0>;
 	};
 };
+#endif
 
 &fec {
 	pinctrl-names = "default";
@@ -162,6 +177,11 @@
 	clock-frequency = <100000>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c1_1>;
+
+	adc@0 {
+		compatible = "adi,ad7091r5";
+		reg = <0x2F>;
+	};
 };
 
 &i2c2 {
@@ -229,15 +249,35 @@
 				/*MX6QDL_PAD_GPIO_1__GPIO1_IO01  0x170b0*/		
 				/*MX6QDL_PAD_EIM_D24__UART3_TX_DATA 0x80000000 */
 				/*MX6QDL_PAD_EIM_D25__UART3_RX_DATA 0x80000000 */
-				/*MX6QDL_PAD_EIM_D28__GPIO3_IO28 0x170b0*/
 				/*+++ wangwenjing*/
 				MX6QDL_PAD_EIM_A25__GPIO5_IO02 0x80000000
 				MX6QDL_PAD_GPIO_1__GPIO1_IO01	0x80000000
 
-				//p20
-				MX6QDL_PAD_KEY_ROW0__GPIO4_IO07	0x80000000
+				//ad rst
+				MX6QDL_PAD_GPIO_3__GPIO1_IO03	0x80000000
 
-				MX6QDL_PAD_CSI0_DAT11__GPIO5_IO29	0x80000000
+				//p20
+				MX6QDL_PAD_KEY_COL0__GPIO4_IO06	0x80000000			/*in-p20_1*/
+				MX6QDL_PAD_KEY_COL1__GPIO4_IO08	0x80000000			/*in-p20_3*/
+				MX6QDL_PAD_KEY_COL2__GPIO4_IO10 0x80000000          /*in-p20_5*/
+
+				MX6QDL_PAD_GPIO_17__GPIO7_IO12	0x80000000			/*out-p20_10*/
+				MX6QDL_PAD_CSI0_DAT18__GPIO6_IO04	0x80000000		/*out-p20_12*/				
+				MX6QDL_PAD_CSI0_DAT8__GPIO5_IO26	0x80000000		/*out-p20_14*/
+
+				MX6QDL_PAD_KEY_ROW0__GPIO4_IO07		0x80000000		/*in-p20_15*/
+				MX6QDL_PAD_KEY_ROW1__GPIO4_IO09		0x80000000		/*in-p20_17*/
+				MX6QDL_PAD_KEY_ROW2__GPIO4_IO11		0x80000000		/*in-p20_19*/
+				
+				MX6QDL_PAD_CSI0_DAT19__GPIO6_IO05	0x80000000		/*out-p20_20*/
+				MX6QDL_PAD_CSI0_DAT9__GPIO5_IO27	0x80000000		/*out-p20_21*/
+				MX6QDL_PAD_CSI0_DAT10__GPIO5_IO28	0x80000000		/*out-p20_22*/
+				MX6QDL_PAD_CSI0_DAT11__GPIO5_IO29	0x80000000		/*out-p20_23*/
+				
+				//p24
+				MX6QDL_PAD_GPIO_19__GPIO4_IO05		0x80000000		/*out-p24_5*/
+				MX6QDL_PAD_GPIO_3__GPIO1_IO03		0x80000000		/*out-p24_6*/
+				MX6QDL_PAD_GPIO_8__GPIO1_IO08		0x80000000		/*out-p24_8*/
 			>;
 		};
 	};
@@ -352,6 +392,10 @@
 	pinctrl-0 = <&pinctrl_pwm1_1>;
 	lcd_12v = <&gpio1 7 0>;
               lcd_3p3 = <&gpio4 11 1>;
-	bl_pwr = <&gpio1 6 0>; 
+	bl_pwr = <&gpio1 6 0>;
+
+	//ad rst
+	//ad7091_rst = <&gpio1 3 0>;
+ 
 	status = "okay";
 };

@@ -296,6 +296,7 @@
 	pu-supply = <&pu_dummy>; /* use pu_dummy if VDDSOC share with VDDPU */
 };
 
+#if 0
 &ecspi1 {
 	fsl,spi-num-chipselects = <2>;
 	cs-gpios = <&gpio4 9 0>,
@@ -311,6 +312,7 @@
 		reg = <0>;
 	};
 };
+#endif
 
 &fec {
 	pinctrl-names = "default";
@@ -636,8 +638,8 @@
 				/*MX6QDL_PAD_EIM_D25__UART3_RX_DATA 0x80000000 */
 				/*+++wangwenjing*/
 				//MX6QDL_PAD_GPIO_6__GPIO1_IO06  0x80000000
-				MX6QDL_PAD_KEY_ROW2__GPIO4_IO11  0x80000000
-				MX6QDL_PAD_KEY_ROW1__GPIO4_IO09  0x80000000
+				//MX6QDL_PAD_KEY_ROW2__GPIO4_IO11  0x80000000
+				//MX6QDL_PAD_KEY_ROW1__GPIO4_IO09  0x80000000
 				MX6QDL_PAD_KEY_COL2__GPIO4_IO10   0x80000000
 				MX6QDL_PAD_GPIO_7__GPIO1_IO07  0x80000000
 			>;
@@ -700,11 +702,13 @@
 	status = "okay";
 };
 
+#if 0
 &uart1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart1_1>;
 	status = "okay";
 };
+#endif
 
 &usbh1 {
 	vbus-supply = <&reg_usb_h1_vbus>;

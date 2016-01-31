@@ -19,6 +19,7 @@
 #include <linux/io.h>
 #include <linux/pwm.h>
 #include <linux/of_device.h>
+#include <linux/delay.h>
 
 /* i.MX1 and i.MX21 share the same PWM function block: */
 
@@ -244,6 +245,7 @@ static int bl_pwr_flag;
 static int lcd_12v_gpio;
 static int lcd_3p3_gpio;
 static int bl_pwr_gpio;
+static int ad7091_rst;
 
 static int imx_pwm_probe(struct platform_device *pdev)
 {
@@ -259,6 +261,22 @@ static int imx_pwm_probe(struct platform_device *pdev)
 	if (!of_id)
 		return -ENODEV;
 
+	//add ben
+	//ad7091_rst = of_get_named_gpio(np, "ad7091_rst", 0);
+	//ret = gpio_request(ad7091_rst, "ad7091_rst");
+    //if(ret){
+    // 	printk("request ad7091_rst failed\n");
+    //    return;
+ 	//}
+
+	//gpio_direction_output(ad7091_rst, 1);
+	//mdelay(50);
+
+	//gpio_set_value(ad7091_rst, 0);
+	//mdelay(50);
+	//gpio_set_value(ad7091_rst, 1);
+
+	
 	lcd_12v_gpio = of_get_named_gpio_flags(np, "lcd_12v", 0,
 			(enum of_gpio_flags *)&lcd_12v_flag);
 	lcd_3p3_gpio = of_get_named_gpio_flags(np, "lcd_3p3", 0,
