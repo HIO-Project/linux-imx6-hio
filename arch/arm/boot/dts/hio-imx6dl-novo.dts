@@ -390,9 +390,9 @@
 &pwm1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_pwm1_1>;
-	lcd_12v = <&gpio1 7 0>;
-              lcd_3p3 = <&gpio4 11 1>;
-	bl_pwr = <&gpio1 6 0>;
+	//lcd_12v = <&gpio1 7 0>;
+    //lcd_3p3 = <&gpio4 11 1>;
+	//bl_pwr = <&gpio1 6 0>;
 
 	//ad rst
 	//ad7091_rst = <&gpio1 3 0>;
