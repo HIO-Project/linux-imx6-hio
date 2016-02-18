@@ -117,11 +117,9 @@
     novoGpio {
         compatible = "novo,gpio";
         status = "okay";
-    
-        p20_1 = <&gpio4 7 0>;
-		
-		//out
-		p20_10 = <&gpio7 12 0>;
+   
+		//wifi wf111 rst 
+        wf111_rst = <&gpio5 2 0>;
 	};
 };
 
@@ -197,7 +195,7 @@
 
 	mega48@60 {
 		compatible = "fsl,mega48-i2c";
-		sata-poweren=<&gpio5 2 0>;
+		//sata-poweren=<&gpio5 2 0>;
 		reg = <0x60>;
 	};
 
@@ -250,7 +248,7 @@
 				/*MX6QDL_PAD_EIM_D24__UART3_TX_DATA 0x80000000 */
 				/*MX6QDL_PAD_EIM_D25__UART3_RX_DATA 0x80000000 */
 				/*+++ wangwenjing*/
-				MX6QDL_PAD_EIM_A25__GPIO5_IO02 0x80000000
+				//MX6QDL_PAD_EIM_A25__GPIO5_IO02 0x80000000
 				MX6QDL_PAD_GPIO_1__GPIO1_IO01	0x80000000
 
 				//ad rst
@@ -278,6 +276,8 @@
 				MX6QDL_PAD_GPIO_19__GPIO4_IO05		0x80000000		/*out-p24_5*/
 				MX6QDL_PAD_GPIO_3__GPIO1_IO03		0x80000000		/*out-p24_6*/
 				MX6QDL_PAD_GPIO_8__GPIO1_IO08		0x80000000		/*out-p24_8*/
+
+				MX6QDL_PAD_EIM_A25__GPIO5_IO02		0x80000000      /*wf111 rst*/
 			>;
 		};
 	};

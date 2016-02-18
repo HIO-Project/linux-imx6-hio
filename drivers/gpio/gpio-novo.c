@@ -233,17 +233,42 @@ static struct attribute_group novo_gpio_attr_group = {
 
 static int novo_gpio_probe(struct platform_device *pdev)
 {
+#if 0
 	if (__novo_gpio_probe(pdev) == 0)
     	return sysfs_create_group(&pdev->dev.kobj, &novo_gpio_attr_group);
 	else
 		return 0;
+#endif
+
+	int rst,ret;
+	struct device_node* np = pdev->dev.of_node;
+
+	rst = of_get_named_gpio(np, "wf111_rst", 0);
+	if (!gpio_is_valid(rst)){
+    	printk("can not find wf111_rst gpio pins\n");
+        return -1;
+	}
+    ret = gpio_request(rst, "wf111_rst");
+    if(ret){
+    	printk("request gpio wf111_rst failed\n");
+        return;
+  	}
+
+
+	gpio_direction_output(rst, 1);
+	gpio_set_value(rst, 0);
+	mdelay(100);
+	gpio_set_value(rst, 1);
+	
+	return 0;
 }
 
 static int novo_gpio_remove(struct platform_device *pdev)
 {
+#if 0
          __novo_gpio_remove(pdev);                                     
          sysfs_remove_group(&pdev->dev.kobj, &novo_gpio_attr_group);
-
+#endif
          return 0;
 }
 

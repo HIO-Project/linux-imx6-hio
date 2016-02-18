@@ -237,6 +237,7 @@ static void mac_id_sys_init(void)
 //+++wangwenjing begin 20150612@add sata power api control
 int power_statu = 1;
 int sata_power_en;
+#if 0
 static int show_powr_off(struct seq_file* seq, void* data){
 	char status[3] = {0};
 	sprintf(status, "%d\n", power_statu);
@@ -276,6 +277,8 @@ static const struct file_operations pwr_status_fops={
 	.read = seq_read,
 	.write = pwr_set,
 };
+#endif
+
 //+++wangwenjing end 20150612@add sata power api control
 static int mega48_probe(struct i2c_client *client,
 						       const struct i2c_device_id *id)
@@ -300,7 +303,7 @@ static int mega48_probe(struct i2c_client *client,
 				gpio_direction_output(sata_power_en, 1);
 				//+++wangwenjing begin 20150612@add sata power api control
 			        struct proc_dir_entry *pwr_root_dir = proc_mkdir("power", NULL);
-				proc_create("sata_power", 0660, pwr_root_dir, &pwr_status_fops);
+				//proc_create("sata_power", 0660, pwr_root_dir, &pwr_status_fops);
 				//+++wangwenjing end 20150612@add sata power api control
 			}
 		}
