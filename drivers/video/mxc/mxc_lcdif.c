@@ -36,12 +36,23 @@ struct mxc_lcdif_data {
 #define DISPDRV_LCD	"lcd"
 
 static struct fb_videomode lcdif_modedb[] = {
+#if 0
 	{
 		/*EJ080 800x600 @ 60hz, pixel clk @ 26MHz*/
 		"LCD-EJ080", 60, 800, 600, 25000,
         46, 210,
         23, 12,
         20, 10,
+        0,
+        FB_VMODE_NONINTERLACED,
+        FB_MODE_IS_DETAILED,},
+#endif
+    {
+        /*EJ080 800x600 @ 60hz, pixel clk @ 26MHz*/
+        "LCD-EJ080", 60, 800, 600, 25000,
+        46, 210,
+        23, 12,
+        1, 1,
         0,
         FB_VMODE_NONINTERLACED,
         FB_MODE_IS_DETAILED,},
