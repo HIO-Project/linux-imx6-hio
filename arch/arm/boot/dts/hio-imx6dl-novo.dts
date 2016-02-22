@@ -120,6 +120,18 @@
    
 		//wifi wf111 rst 
         wf111_rst = <&gpio5 2 0>;
+
+		//bt bt_sw_gpio4
+		bt_sw_gpio4 = <&gpio1 4 0>;
+	
+		//bt_wup_gpio9
+		bt_wup_gpio9 = <&gpio1 9 0>;
+			
+		//bt_rst_gpio7
+		bt_rst_gpio7 = <&gpio1 7 0>;
+
+		//bt_pwr_row4
+		bt_pwr_row4 = <&gpio4 15 0>;
 	};
 };
 
@@ -278,6 +290,12 @@
 				MX6QDL_PAD_GPIO_8__GPIO1_IO08		0x80000000		/*out-p24_8*/
 
 				MX6QDL_PAD_EIM_A25__GPIO5_IO02		0x80000000      /*wf111 rst*/
+
+				//bt
+				MX6QDL_PAD_KEY_ROW4__GPIO4_IO15		0x80000000		/*BT_PWR_ROW4*/
+				MX6QDL_PAD_GPIO_4__GPIO1_IO04		0x80000000		/*BT_SW_GPIO4*/
+				MX6QDL_PAD_GPIO_9__GPIO1_IO09		0x80000000		/*BT_WUP_GPIO9*/
+				MX6QDL_PAD_GPIO_7__GPIO1_IO07		0x80000000		/*BT_RST_GPIO7*/			
 			>;
 		};
 	};
@@ -311,13 +329,12 @@
 	pinctrl-0 = <&pinctrl_uart3_1>;
 };
 
-#if 0
 &uart4 {
-       status = "okay";
-       pinctrl-names = "default";
-       pinctrl-0 = <&pinctrl_uart4_1>;
+    status = "okay";
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_uart4_1>;
+	//fsl,uart-has-rtscts;
 };
-#endif
 
 &uart5 {
        status = "okay";
@@ -387,6 +404,7 @@
 	status = "okay";
 };
 
+#if 0
 &pwm1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_pwm1_1>;
@@ -399,3 +417,4 @@
  
 	status = "okay";
 };
+#endif

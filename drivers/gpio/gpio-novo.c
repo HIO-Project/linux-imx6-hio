@@ -241,6 +241,7 @@ static int novo_gpio_probe(struct platform_device *pdev)
 #endif
 
 	int rst,ret;
+	int bt_pwr_row4,bt_sw_gpio4,bt_wup_gpio9,bt_rst_gpio7;
 	struct device_node* np = pdev->dev.of_node;
 
 	rst = of_get_named_gpio(np, "wf111_rst", 0);
@@ -259,7 +260,62 @@ static int novo_gpio_probe(struct platform_device *pdev)
 	gpio_set_value(rst, 0);
 	mdelay(100);
 	gpio_set_value(rst, 1);
-	
+
+	//bt
+	bt_pwr_row4 = of_get_named_gpio(np, "bt_pwr_row4", 0);
+    if (!gpio_is_valid(bt_pwr_row4)){
+        printk("can not find bt_pwr_row4 gpio pins\n");
+        return -1;
+    }
+    ret = gpio_request(bt_pwr_row4, "bt_pwr_row4");
+    if(ret){
+        printk("request gpio bt_pwr_row4 failed\n");
+        return;
+    }
+	gpio_direction_output(bt_pwr_row4, 1);	
+
+
+    bt_sw_gpio4 = of_get_named_gpio(np, "bt_sw_gpio4", 0);
+    if (!gpio_is_valid(bt_sw_gpio4)){
+        printk("can not find bt_sw_gpio4 gpio pins\n");
+        return -1;
+    }
+    ret = gpio_request(bt_sw_gpio4, "bt_sw_gpio4");
+    if(ret){
+        printk("request gpio bt_sw_gpio4 failed\n");
+        return;
+    }
+    gpio_direction_output(bt_sw_gpio4, 1);
+
+	bt_rst_gpio7 = of_get_named_gpio(np, "bt_rst_gpio7", 0);
+    if (!gpio_is_valid(bt_rst_gpio7)){
+        printk("can not find bt_rst_gpio7 gpio pins\n");
+        return -1;
+    }
+    ret = gpio_request(bt_rst_gpio7, "bt_rst_gpio7");
+    if(ret){
+        printk("request gpio bt_rst_gpio7 failed\n");
+        return;
+    }
+    gpio_direction_output(bt_rst_gpio7, 1);
+    gpio_set_value(bt_rst_gpio7, 0);
+    mdelay(100);
+    gpio_set_value(bt_rst_gpio7, 1);
+
+    bt_wup_gpio9 = of_get_named_gpio(np, "bt_wup_gpio9", 0);
+    if (!gpio_is_valid(bt_wup_gpio9)){
+        printk("can not find bt_wup_gpio9 gpio pins\n");
+        return -1;
+    }
+    ret = gpio_request(bt_wup_gpio9, "bt_wup_gpio9");
+    if(ret){
+        printk("request gpio bt_wup_gpio9 failed\n");
+        return;
+    }
+    gpio_direction_output(bt_wup_gpio9, 0);
+	mdelay(100);
+    gpio_set_value(bt_wup_gpio9, 1);
+
 	return 0;
 }
 
