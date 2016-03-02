@@ -132,6 +132,8 @@
 
 		//bt_pwr_row4
 		bt_pwr_row4 = <&gpio4 15 0>;
+		cts_gnd = <&gpio6 3 0>;
+		rts_gnd = <&gpio6 2 0>;
 	};
 };
 
@@ -295,7 +297,10 @@
 				MX6QDL_PAD_KEY_ROW4__GPIO4_IO15		0x80000000		/*BT_PWR_ROW4*/
 				MX6QDL_PAD_GPIO_4__GPIO1_IO04		0x80000000		/*BT_SW_GPIO4*/
 				MX6QDL_PAD_GPIO_9__GPIO1_IO09		0x80000000		/*BT_WUP_GPIO9*/
-				MX6QDL_PAD_GPIO_7__GPIO1_IO07		0x80000000		/*BT_RST_GPIO7*/			
+				MX6QDL_PAD_GPIO_7__GPIO1_IO07		0x80000000		/*BT_RST_GPIO7*/
+
+				MX6QDL_PAD_CSI0_DAT17__GPIO6_IO03	0x80000000		/*cts gnd*/
+				MX6QDL_PAD_CSI0_DAT16__GPIO6_IO02	0x80000000		/*rts gnd*/			
 			>;
 		};
 	};
