@@ -196,6 +196,18 @@ static irqreturn_t tsc2007_soft_irq(int irq, void *handle)
 	struct ts_event tc;
 	u32 rt;
 
+	/*
+	 * Disable the irq, as it may fire several other IRQs during
+	 * this thread is handling data, as suggested by the TSC2007
+	 * datasheet, p19, "Touch Detect" chapter.
+	 *
+	 * Most of the tsc2007 platforms are using a gpio line as
+	 * tsc2007's irq line, so calling disable_irq_nosync() will
+	 * actually prevent the gpio controller from firing IRQ for
+	 * this tsc2007 line in such case.
+	 */
+	disable_irq_nosync(irq);
+
 	while (!ts->stopped && tsc2007_is_pen_down(ts)) {
 
 		/* pen is down, continue with the measurement */
@@ -246,6 +258,7 @@ static irqreturn_t tsc2007_soft_irq(int irq, void *handle)
 	if (ts->clear_penirq)
 		ts->clear_penirq();
 
+	enable_irq(irq);
 	return IRQ_HANDLED;
 }
 
