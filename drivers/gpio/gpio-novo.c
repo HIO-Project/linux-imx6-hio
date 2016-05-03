@@ -245,6 +245,7 @@ static int novo_gpio_probe(struct platform_device *pdev)
 	int cts_gnd,rts_gnd;
 	struct device_node* np = pdev->dev.of_node;
 
+	printk("ben: novo_gpio_probe \n");
 	rst = of_get_named_gpio(np, "wf111_rst", 0);
 	if (!gpio_is_valid(rst)){
     	printk("can not find wf111_rst gpio pins\n");
@@ -318,19 +319,24 @@ static int novo_gpio_probe(struct platform_device *pdev)
     gpio_set_value(bt_wup_gpio9, 1);
 
 
+	//tsc2007_pwr
 	//rts,cts
-    cts_gnd = of_get_named_gpio(np, "cts_gnd", 0);
+    cts_gnd = of_get_named_gpio(np, "tsc2007_pwr", 0);
     if (!gpio_is_valid(cts_gnd)){
-        printk("can not find cts_gnd gpio pins\n");
+        printk("can not find tsc2007_pwr gpio pins\n");
         return -1;
     }
-    ret = gpio_request(cts_gnd, "cts_gnd");
+    ret = gpio_request(cts_gnd, "tsc2007_pwr");
     if(ret){
-        printk("request gpio cts_gnd failed\n");
+        printk("request gpio tsc2007_pwr failed\n");
         return;
     }
-    gpio_direction_output(cts_gnd, 0);
 
+	//test
+    gpio_direction_output(cts_gnd, 0);
+	msleep(100);
+	gpio_direction_output(cts_gnd, 1);
+	
 
     rts_gnd = of_get_named_gpio(np, "rts_gnd", 0);
     if (!gpio_is_valid(rts_gnd)){

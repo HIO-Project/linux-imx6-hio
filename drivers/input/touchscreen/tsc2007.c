@@ -320,8 +320,8 @@ static int tsc2007_probe_dt(struct i2c_client *client, struct tsc2007 *ts,
 	int gpio1;
 
     //ben test
-    gpio1 = of_get_named_gpio(np, "gpio1", 0);
-    printk("ben:test %d\n", gpio1);
+    //gpio1 = of_get_named_gpio(np, "gpio1", 0);
+    //printk("ben:test %d\n", gpio1);
 
 	if (!of_property_read_u32(np, "ti,max-rt", &val32))
 		ts->max_rt = val32;
@@ -410,6 +410,7 @@ static int tsc2007_probe(struct i2c_client *client,
 	struct input_dev *input_dev;
 	int err = 0;
 
+	printk("ben: tsc2007_probe \n");
 	ts = devm_kzalloc(&client->dev, sizeof(struct tsc2007), GFP_KERNEL);
 	if (!ts)
 		return -ENOMEM;

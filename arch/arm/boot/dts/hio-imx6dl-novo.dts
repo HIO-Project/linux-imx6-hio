@@ -132,7 +132,7 @@
 
 		//bt_pwr_row4
 		bt_pwr_row4 = <&gpio4 15 0>;
-		cts_gnd = <&gpio6 3 0>;
+		tsc2007_pwr = <&gpio6 3 0>;
 		rts_gnd = <&gpio6 2 0>;
 	};
 };
@@ -223,10 +223,11 @@
 
 &i2c3 {
 	status = "okay";
-	clock-frequency = <50000>;
+	clock-frequency = <200000>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c3_2>;
 
+#if 1
 	tsc2007@48 {
     	compatible = "ti,tsc2007";
         reg = <0x48>;
@@ -239,6 +240,19 @@
 		//test
 		//gpio1 = <&gpio4 7 0>;       
 	};
+#endif
+
+#if 0
+	/*add max11801*/
+	max11801@4a {
+		compatible = "maxim,max11801";
+		reg = <0x4a>;
+		interrupt-parent = <&gpio1>;
+		interrupts = <0x1 0x3>;
+		work-mode = <0>;/*DCM mode*/
+	};
+#endif
+
 };
 
 &iomuxc {

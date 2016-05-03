@@ -434,6 +434,7 @@
 		reg = <0x50>;
 	};
 
+#if 0
 	max11801@48 {
 		compatible = "maxim,max11801";
 		reg = <0x48>;
@@ -441,6 +442,7 @@
 		interrupts = <26 2>;
 		work-mode = <1>;/*DCM mode*/
 	};
+#endif
 
 	pmic: pfuze100@08 {
 		compatible = "fsl,pfuze100";
